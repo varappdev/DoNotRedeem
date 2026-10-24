@@ -30,6 +30,7 @@ fn main() {
                 .with_decorations(false)
                 .with_resizable(false)
                 .with_inner_size(LogicalSize::new(800.0, 600.0))
+                .with_max_inner_size(LogicalSize::new(1000.0, 800.0))
         );
 
     LaunchBuilder::desktop()
@@ -62,16 +63,18 @@ fn Titlebar() -> Element {
                     onclick: move |_| window().set_minimized(true),
                 }
 
-                // Maximise / Restore Button
-                button { 
-                    aria_label: if *is_max.read() {"Restore"} else{ "Maximize"},
-                    onmousedown: move |event| event.stop_propagation(),
-                    onclick: move |_| {
-                        window().toggle_maximized();
-                        is_max.toggle();
-                    },
-                    
-                }
+                /*
+                    // Maximise / Restore Button
+                    button { 
+                        aria_label: if *is_max.read() {"Restore"} else{ "Maximize"},
+                        onmousedown: move |event| event.stop_propagation(),
+                        onclick: move |_| {
+                            window().toggle_maximized();
+                            is_max.toggle();
+                        },
+                        
+                    }
+                */
 
                 // Close Button
                 button { 
