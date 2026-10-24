@@ -6,6 +6,8 @@ members = ["donotredeem-shared"]
 license = "GPL-3.0-or-later"
 
 [workspace.dependencies]
+donotredeem-shared = { path = "donotredeem-shared" }
+
 tokio = { version = "1.54.1", features = ["full"] }
 reqwest = { version = "0.13.5" }
 serde = { version = "1.0.229", features = ["derive"] }
