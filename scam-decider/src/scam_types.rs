@@ -1,9 +1,23 @@
 use std::fmt;
 
-use strum::VariantArray;
+use serde::{Deserialize, Serialize};
+use strum::{EnumString, IntoStaticStr, VariantArray};
 
 // the kinds of financial scams we can label a message as
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash, VariantArray)]
+#[derive(
+    Debug,
+    Clone,
+    Copy,
+    Default,
+    PartialEq,
+    Eq,
+    Hash,
+    VariantArray,
+    EnumString,
+    IntoStaticStr,
+    Serialize,
+    Deserialize,
+)]
 pub enum ScamType {
     // not a scam at all, a clean message
     #[default]
@@ -170,7 +184,7 @@ impl ScamType {
     // red flags that usually show up for this scam, empty for NotAScam
     pub fn telltales(&self) -> &'static [&'static str] {
         match self {
-            ScamType::NotAScam => &[],
+            ScamType::NotAScam => &[""],
             ScamType::AdvanceFee => &[
                 "A large payout is promised but only after a smaller payment.",
                 "The fee is labelled as tax, customs, insurance or a release charge.",
