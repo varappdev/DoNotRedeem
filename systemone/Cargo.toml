@@ -1,0 +1,12 @@
+[package]
+name = "systemone"
+version = "0.1.0"
+edition = "2024"
+description = "Async Rust client for the System One (typed decisions) API: send state and typed questions, get typed answers back."
+license.workspace = true
+
+[dependencies]
+reqwest = { workspace = true, features = ["json"] }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
