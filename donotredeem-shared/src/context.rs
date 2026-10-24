@@ -46,7 +46,9 @@ impl ContextBuilder {
 
         let systemone = self
             .systemone
-            .ok_or(ContextError::Systemone(SystemoneContextError::MissingModel))?
+            .ok_or(ContextError::Systemone(
+                SystemoneContextError::MissingModels,
+            ))?
             .build()
             .map_err(ContextError::Systemone)?;
 
@@ -128,14 +130,18 @@ impl OpenaiContextBuilder {
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct SystemoneContext {
-    model: String,
+    models: Vec<String>,
     url: String,
     api_key: String,
 }
 
 impl SystemoneContext {
     pub fn model(&self) -> &str {
-        &self.model
+        self.models[0].as_str()
+    }
+
+    pub fn models(&self) -> &[String] {
+        &self.models
     }
 
     pub fn url(&self) -> &str {
@@ -150,8 +156,8 @@ impl SystemoneContext {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, Error)]
 #[allow(clippy::enum_variant_names)]
 pub enum SystemoneContextError {
-    #[error("Missing model in Systemone context")]
-    MissingModel,
+    #[error("Missing models in Systemone context")]
+    MissingModels,
     #[error("Missing URL in Systemone context")]
     MissingUrl,
     #[error("Missing API key in Systemone context")]
@@ -160,7 +166,7 @@ pub enum SystemoneContextError {
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Default, Serialize, Deserialize)]
 pub struct SystemoneContextBuilder {
-    model: Option<String>,
+    models: Vec<String>,
     url: Option<String>,
     api_key: Option<String>,
 }
@@ -168,14 +174,18 @@ pub struct SystemoneContextBuilder {
 impl SystemoneContextBuilder {
     pub fn new() -> Self {
         Self {
-            model: None,
+            models: vec![],
             url: None,
             api_key: None,
         }
     }
 
-    pub fn model(mut self, model: impl Into<String>) -> Self {
-        self.model = Some(model.into());
+    pub fn model(self, model: impl Into<String>) -> Self {
+        self.add_model(model)
+    }
+
+    pub fn add_model(mut self, model: impl Into<String>) -> Self {
+        self.models.push(model.into());
         self
     }
 
@@ -190,12 +200,14 @@ impl SystemoneContextBuilder {
     }
 
     pub fn build(self) -> Result<SystemoneContext, SystemoneContextError> {
-        let model = self.model.ok_or(SystemoneContextError::MissingModel)?;
+        if self.models.is_empty() {
+            return Err(SystemoneContextError::MissingModels);
+        }
         let url = self.url.ok_or(SystemoneContextError::MissingUrl)?;
         let api_key = self.api_key.ok_or(SystemoneContextError::MissingApiKey)?;
 
         Ok(SystemoneContext {
-            model,
+            models: self.models,
             url,
             api_key,
         })
