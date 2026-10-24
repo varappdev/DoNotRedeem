@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["donotredeem-shared"]
+members = ["donotredeem-shared", "jev_api"]
 
 [workspace.package]
 license = "GPL-3.0-or-later"
