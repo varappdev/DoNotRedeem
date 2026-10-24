@@ -1,0 +1,111 @@
+html, body, #main { margin: 0; height: 100vh; overflow: hidden; }
+
+.app-window {
+    height: 100%;
+}
+
+.home {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 30vw;
+    margin-right: 30vw;
+}
+
+.home textarea {
+    resize: vertical;
+}
+
+.home .status-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    
+}
+
+/*.desktop {
+  position: relative;
+  height: 100vh;
+  background: #008080;
+  font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: 11px;
+}
+
+
+.desktop-icons {
+  position: absolute; top: 8px; left: 8px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.desktop-icon {
+  width: 72px; text-align: center; color: #fff; cursor: default; outline: none;
+}
+.desktop-icon .icon { font-size: 30px; line-height: 38px; }
+.desktop-icon span { padding: 1px 2px; }
+.desktop-icon.selected span { background: navy; outline: 1px dotted #fff; }
+.desktop-icon.selected .icon { filter: sepia(1) hue-rotate(190deg) saturate(4) brightness(0.7); }
+
+
+.app-window { position: absolute; width: 340px; display: flex; flex-direction: column; }
+.app-window .window-body { flex: 1; min-height: 0; overflow: auto; }
+.app-window .title-bar { cursor: default; user-select: none; }
+
+
+.taskbar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 28px; z-index: 100000;
+  display: flex; align-items: center; gap: 4px; padding: 0 2px;
+  background: silver;
+  box-shadow: inset 0 1px #dfdfdf, inset 0 2px #fff;
+}
+.taskbar button { min-width: 0; height: 22px; }
+.start-button {
+  display: flex; align-items: center; gap: 4px; padding: 0 6px; font-weight: bold;
+}
+.start-button.open,
+.taskbar-item.active {
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+.taskbar-item.active { background: repeating-conic-gradient(#fff 0 25%, silver 0 50%) 0 0 / 2px 2px; font-weight: bold; }
+.windows-logo { width: 16px; height: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; transform: skewY(-6deg); }
+.windows-logo i:nth-child(1) { background: #f03c00; }
+.windows-logo i:nth-child(2) { background: #3cb400; }
+.windows-logo i:nth-child(3) { background: #0050f0; }
+.windows-logo i:nth-child(4) { background: #f0c800; }
+
+.taskbar-items { flex: 1; display: flex; gap: 3px; overflow: hidden; }
+.taskbar-item {
+  width: 150px; text-align: left; padding: 0 6px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.taskbar-item .icon { color: #000; text-shadow: none; } 
+.clock {
+  height: 22px; display: flex; align-items: center; padding: 0 10px;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px grey;
+}
+
+
+.start-menu {
+  position: absolute; left: 2px; bottom: 26px; width: 200px; z-index: 100001;
+  display: flex; padding: 3px;
+}
+.start-menu-band {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  background: linear-gradient(navy, #1084d0); color: silver;
+  font-size: 18px; font-weight: bold; padding: 6px 3px; letter-spacing: 1px;
+}
+.start-menu-band b { color: #fff; }
+.start-menu ul { list-style: none; margin: 0; padding: 0; flex: 1; }
+.start-menu li { display: flex; gap: 8px; align-items: center; padding: 6px 8px; cursor: default; }
+.start-menu li:hover { background: navy; color: #fff; }
+.start-menu .icon { font-size: 20px; }
+
+
+.muted { color: #555; }
+.counter p { font-size: 13px; margin: 4px 0; }
+.notepad { display: flex; flex-direction: column; height: 220px; gap: 4px; }
+.notepad textarea { flex: 1; resize: none; font-family: "Lucida Console", monospace; }
+.todo .field-row input[type="text"] { flex: 1; }
+.todo ul { padding-left: 0; list-style: none; }
+.todo li { padding: 3px 0; }
+.todo .done { text-decoration: line-through; color: #777; }
+
+*/
