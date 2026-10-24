@@ -1,0 +1,12 @@
+[package]
+name = "scam-decider"
+version = "0.1.0"
+edition = "2024"
+license.workspace = true
+
+[dependencies]
+systemone.workspace = true
+donotredeem-shared.workspace = true
+strum = { version = "0.28.0", features = ["derive"]  }
+serde.workspace = true
+serde_json.workspace = true

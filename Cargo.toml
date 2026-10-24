@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["donotredeem-shared", "ui", "desktop", "extension", "systemone"]
+members = ["donotredeem-shared", "ui", "desktop", "extension", "systemone", "scam-decider"]
 
 
 [workspace.package]
