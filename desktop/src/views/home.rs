@@ -1,5 +1,4 @@
 use dioxus::prelude::*;
-use crate::ui::Hero;
 
 const CHECK_ICON: Asset = asset!("/assets/icons/check-0.png");
 const RESTRICT_ICON: Asset = asset!("/assets/icons/restrict-1.png");
