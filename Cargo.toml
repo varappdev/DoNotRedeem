@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["donotredeem-shared", "desktop", "systemone"]
+members = ["donotredeem-shared", "ui", "desktop", "extension", "systemone"]
 
 
 [workspace.package]
@@ -9,6 +9,7 @@ license = "GPL-3.0-or-later"
 [workspace.dependencies]
 donotredeem-shared = { path = "donotredeem-shared" }
 systemone = { path = "systemone" }
+ui = { path = "ui" }
 
 tokio = { version = "1.54.1", features = ["full"] }
 reqwest = { version = "0.13.5" }

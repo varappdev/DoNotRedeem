@@ -1,0 +1,16 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.checker textarea {
+    resize: vertical;
+}
+
+.status-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}

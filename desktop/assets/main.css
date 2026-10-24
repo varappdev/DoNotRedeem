@@ -11,18 +11,6 @@ html, body, #main { margin: 0; height: 100vh; overflow: hidden; }
     margin-right: 30vw;
 }
 
-.home textarea {
-    resize: vertical;
-}
-
-.home .status-container {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    align-items: center;
-    
-}
-
 /*.desktop {
   position: relative;
   height: 100vh;

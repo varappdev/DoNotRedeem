@@ -1,0 +1,5 @@
+html, body, #main { margin: 0; }
+
+.popup-window {
+    width: 360px;
+}
