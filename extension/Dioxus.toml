@@ -1,0 +1,5 @@
+[application]
+name = "extension"
+
+[web.app]
+title = "Do Not Redeem"

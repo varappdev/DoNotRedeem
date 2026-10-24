@@ -5,10 +5,9 @@ use dioxus::html::object::width;
 use dioxus::prelude::*;
 use dioxus::desktop::{Config, LogicalSize, WindowBuilder, window};
 
-use ui::Navbar;
+use ui::{Navbar, Theme};
 use views::Home;
 
-mod ui;
 mod views;
 
 #[derive(Debug, Clone, Routable, PartialEq)]
@@ -19,7 +18,6 @@ enum Route {
     Home {},
 }
 
-const WIN98_CSS: Asset = asset!("/assets/98.css"); 
 const MAIN_CSS: Asset = asset!("/assets/main.css");
 
 fn main() {
@@ -93,7 +91,7 @@ fn App() -> Element {
     // Build cool things ✌️
 
     rsx! {
-        document::Link { rel: "stylesheet", href: WIN98_CSS },
+        Theme {}
         document::Link { rel: "stylesheet", href: MAIN_CSS }
         div {
             // Global app resources
