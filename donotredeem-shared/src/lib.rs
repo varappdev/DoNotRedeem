@@ -1,3 +1,3 @@
 mod context;
 
-pub use context::{Context, ContextBuilder, ContextError};
+pub use context::*;
