@@ -18,3 +18,6 @@ serde_json = { version = "1.0.154" }
 thiserror = { version = "2.0.21" }
 async-openai  = { version = "0.42.2", features = ["full"] }
 dioxus = { version = "0.7.10" }
+dom_smoothie = { version = "0.18.2" }
+dom_query = { version = "0.29.0" }
+htmd = { version = "0.5.6" }
