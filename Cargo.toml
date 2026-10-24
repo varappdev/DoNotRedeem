@@ -1,2 +1,14 @@
 [workspace]
 resolver = "3"
+
+[workspace.package]
+license = "GPL-3.0-or-later"
+
+[workspace.dependencies]
+tokio = { version = "1.54.1", features = ["full"] }
+reqwest = { version = "0.13.5" }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = { version = "1.0.154" }
+thiserror = { version = "2.0.21" }
+async-openai  = { version = "0.42.2", features = ["full"] }
+dioxus = { version = "0.7.10" }
