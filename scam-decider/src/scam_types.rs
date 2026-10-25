@@ -70,6 +70,8 @@ pub enum ScamType {
     CryptoGiveaway,
     // cold call offering to "fix" a computer, account or security problem
     TechSupport,
+    // a scam that does not match any of the categories above
+    Other,
 }
 
 impl ScamType {
@@ -100,6 +102,7 @@ impl ScamType {
         ScamType::FakeCharity,
         ScamType::CryptoGiveaway,
         ScamType::TechSupport,
+        ScamType::Other,
     ];
 
     // one line about what the scam is
@@ -178,13 +181,14 @@ impl ScamType {
             ScamType::TechSupport => {
                 "Cold call or pop-up claiming a device or account is compromised and needs paid help."
             }
+            ScamType::Other => "A scam that does not fit any of the other categories.",
         }
     }
 
     // red flags that usually show up for this scam, empty for NotAScam
     pub fn telltales(&self) -> &'static [&'static str] {
         match self {
-            ScamType::NotAScam => &[""],
+            ScamType::NotAScam => &["It is not.", "It isn't."],
             ScamType::AdvanceFee => &[
                 "A large payout is promised but only after a smaller payment.",
                 "The fee is labelled as tax, customs, insurance or a release charge.",
@@ -329,6 +333,12 @@ impl ScamType {
                 "Payment for support is asked in gift cards or crypto.",
                 "The caller knows only generic details and pressures you to act now.",
             ],
+            ScamType::Other => &[
+                "The message asks for money or personal details but fits no known scam pattern.",
+                "Urgency, a threat or a too-good-to-be-true promise is used to get a payment.",
+                "The sender or company cannot be verified, and only untraceable payment methods are offered.",
+                "The story does not hold up and the details change when questioned.",
+            ],
         }
     }
 
@@ -366,8 +376,34 @@ impl fmt::Display for ScamType {
             ScamType::FakeCharity => "Fake charity",
             ScamType::CryptoGiveaway => "Crypto giveaway",
             ScamType::TechSupport => "Tech support scam",
+            ScamType::Other => "Other",
         };
 
         f.write_str(name)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::str::FromStr;
+
+    use strum::VariantArray;
+
+    use super::*;
+
+    #[test]
+    fn all_lists_every_variant() {
+        assert_eq!(ScamType::ALL, ScamType::VARIANTS);
+    }
+
+    #[test]
+    fn other_labels_unclassified_scams() {
+        let other = ScamType::Other;
+
+        assert!(other.is_scam());
+        assert!(!other.description().is_empty());
+        assert!(!other.telltales().is_empty());
+        assert_eq!(ScamType::from_str("Other").unwrap(), other);
+        assert_eq!(other.to_string(), "Other");
     }
 }
