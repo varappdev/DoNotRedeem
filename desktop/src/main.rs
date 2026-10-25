@@ -24,7 +24,7 @@ fn main() {
     let config = Config::new()
         .with_window(
             WindowBuilder::new()
-                .with_title("Do Not Redeem")
+                .with_title("Scamvoidance")
                 .with_decorations(false)
                 .with_resizable(false)
                 .with_inner_size(LogicalSize::new(800.0, 600.0))
@@ -49,7 +49,7 @@ fn Titlebar() -> Element {
             onmousedown: move |_| { window().drag(); },
 
             // Title section
-            div { class: "title-bar-text", "Do Not Redeem" }
+            div { class: "title-bar-text", "Scamvoidance" }
 
             // Control Buttons
             div { class: "title-bar-controls",

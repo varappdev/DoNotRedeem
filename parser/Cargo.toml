@@ -1,0 +1,12 @@
+[package]
+name = "parser"
+version = "0.1.0"
+edition = "2024"
+license.workspace = true
+
+[dependencies]
+dom_smoothie.workspace = true
+dom_query.workspace = true
+htmd.workspace = true
+serde_json.workspace = true
+serde.workspace = true

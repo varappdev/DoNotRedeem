@@ -116,7 +116,10 @@ fn decode_error(status: reqwest::StatusCode, body: &str) -> SystemOneError {
     match serde_json::from_str::<ErrorBody>(body) {
         Ok(parsed) => SystemOneError::Api {
             status: status.as_u16(),
-            code: parsed.error.code.unwrap_or_else(|| i64::from(status.as_u16())),
+            code: parsed
+                .error
+                .code
+                .unwrap_or_else(|| i64::from(status.as_u16())),
             message: parsed.error.message,
             metadata: parsed.error.metadata,
         },
@@ -216,8 +219,11 @@ impl SystemOneClientBuilder {
             Some(client) => client,
             None => {
                 let mut http = reqwest::Client::builder();
-                if let Some(timeout) = self.timeout {
-                    http = http.timeout(timeout);
+                #[cfg(not(target_arch = "wasm32"))]
+                {
+                    if let Some(timeout) = self.timeout {
+                        http = http.timeout(timeout);
+                    }
                 }
                 http.build()?
             }

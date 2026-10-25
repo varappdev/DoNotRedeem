@@ -1,24 +1,29 @@
-use std::fmt::Error;
+use std::{collections::HashMap, fmt::Error};
 
 use dom_query::Document;
 use dom_smoothie::{Article, Config, Readability};
+use serde::{Deserialize, Serialize};
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Security {
     pub domain: String,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Interactives {
     pub links: Vec<String>,
     pub buttons: Vec<String>,
     pub inputs: Vec<String>,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SerialisedDocument {
     pub security: Security,
     pub content: String,
     pub interactives: Interactives,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SimpleSerialisedDocument {
     pub content: String,
     pub security: Security,
@@ -30,9 +35,9 @@ pub fn serialise(html: &str, url: &str) -> Result<SimpleSerialisedDocument, Erro
 
     // Add specific parsing here
 
-    let readability = Readability::new(html, Some(url), None);
-    let article = readability.unwrap().parse();
-    let content = htmd::convert(&article.unwrap().content).unwrap();
+    let mut readability = Readability::new(html, Some(url), None).map_err(|_| Error)?;
+    let article = readability.parse().map_err(|_| Error)?;
+    let content = htmd::convert(&article.content).map_err(|_| Error)?;
 
     Ok(SimpleSerialisedDocument {
         content: content,
@@ -47,6 +52,19 @@ pub fn serialise_content(html: &str) -> Result<String, Error> {
     let article = readability.unwrap().parse();
 
     Ok(htmd::convert(&article.unwrap().content).unwrap())
+}
+
+impl From<SimpleSerialisedDocument> for HashMap<String, String> {
+    fn from(value: SimpleSerialisedDocument) -> Self {
+        let mut map = HashMap::new();
+        map.insert(
+            "security".to_owned(),
+            serde_json::to_string_pretty(&value.security).unwrap(),
+        );
+        map.insert("content".to_owned(), value.content);
+
+        map
+    }
 }
 
 // Returns a string array of links from various sources

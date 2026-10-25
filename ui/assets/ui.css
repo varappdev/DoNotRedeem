@@ -14,3 +14,41 @@
     gap: 5px;
     align-items: center;
 }
+
+.status {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.status-label {
+    margin: 0;
+    font-weight: bold;
+}
+
+.status-headline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-kind {
+    padding: 1px 4px;
+    background: navy;
+    color: white;
+}
+
+.status-risk .progress-indicator {
+    height: 20px;
+    margin-top: 2px;
+}
+
+.status-summary {
+    margin: 0;
+}
+
+.status fieldset ul {
+    margin: 0;
+    padding-left: 16px;
+}

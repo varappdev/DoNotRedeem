@@ -6,3 +6,6 @@ license.workspace = true
 
 [dependencies]
 dioxus = { workspace = true }
+explainer = { workspace = true }
+donotredeem-shared = { workspace = true }
+scam-decider = { workspace = true }

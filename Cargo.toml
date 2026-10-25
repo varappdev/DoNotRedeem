@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["donotredeem-shared", "ui", "desktop", "extension", "systemone", "scam-decider", "explainer"]
+members = ["donotredeem-shared", "ui", "desktop", "extension", "systemone", "scam-decider", "explainer", "parser"]
 
 
 [workspace.package]
@@ -11,6 +11,8 @@ donotredeem-shared = { path = "donotredeem-shared" }
 systemone = { path = "systemone" }
 ui = { path = "ui" }
 scam-decider = { path = "scam-decider" }
+explainer = { path = "explainer" }
+parser = { path = "parser" }
 
 tokio = { version = "1.54.1", features = ["full"] }
 reqwest = { version = "0.13.5" }
