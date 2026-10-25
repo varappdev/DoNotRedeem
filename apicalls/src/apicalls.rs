@@ -4,6 +4,8 @@
  * Convert into text to pass into API call
  * AI produces output
  * Return output
+ *
+ * Deprecated: I was too tired to continue; since been lapsed by a complete version by Victor
  */
 
 use std::collections::HashMap;
