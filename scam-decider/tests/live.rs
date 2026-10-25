@@ -9,7 +9,7 @@
 use std::collections::HashMap;
 
 use donotredeem_shared::{Context, ContextBuilder, OpenaiContextBuilder, SystemoneContextBuilder};
-use scam_decider::decide;
+use scam_decider::{Verdict, decide};
 
 const MODELS: [&str; 3] = [
     "baseten/mammoth-1:free",
@@ -59,9 +59,15 @@ async fn averages_the_decisions_of_three_models() {
     eprintln!("reply: {reply:#?}");
 
     assert!(
-        (0.0..=1.0).contains(&reply.is_scam),
-        "is_scam outside 0..=1: {}",
-        reply.is_scam
+        (0.0..=1.0).contains(&reply.score.value),
+        "score outside 0..=1: {}",
+        reply.score.value
+    );
+    assert_ne!(
+        reply.score.verdict,
+        Verdict::Safe,
+        "a blatant scam notice should at least be cautious, got {:?}",
+        reply.score
     );
     assert!(
         reply.kind.is_scam(),

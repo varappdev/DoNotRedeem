@@ -7,7 +7,7 @@ use std::{
     str::FromStr,
 };
 
-use aggregate::{average_choice, mean_noul};
+use aggregate::{average_choice, mean_score};
 use donotredeem_shared::Context;
 pub use reply::*;
 pub use scam_types::*;
@@ -51,13 +51,23 @@ pub async fn decide(ctx: &Context, state: HashMap<String, String>) -> Result<Rep
         );
     }
 
-    let is_scam_criteria = systemone::NoulCriteria {
-        when_true: Content::Text("This is a scam.".to_owned()),
-        when_false: Content::Text("This is not a scam.".to_owned()),
-    };
-    let is_scam_question = Question::Noul {
-        instructions: Content::Text("Determine if the following is a scam or not.".to_owned()),
-        criteria: Some(is_scam_criteria),
+    let score_question = Question::Score {
+        instructions: Content::Text(
+            "Score how likely the following is a scam, from safe to definitely a scam.".to_owned(),
+        ),
+        criteria: vec![
+            Content::Text(
+                "Safe: no scam indicators, the message looks legitimate.".to_owned(),
+            ),
+            Content::Text(
+                "Caution: some scam indicators or missing information, verify before acting."
+                    .to_owned(),
+            ),
+            Content::Text(
+                "Definitely a scam: a clear scam pattern asks for money, payment details or personal information."
+                    .to_owned(),
+            ),
+        ],
     };
 
     let mut kind_criteria = BTreeMap::new();
@@ -78,7 +88,7 @@ pub async fn decide(ctx: &Context, state: HashMap<String, String>) -> Result<Rep
     };
 
     let first_questions = BTreeMap::from([
-        ("is_scam".to_owned(), is_scam_question),
+        ("score".to_owned(), score_question),
         ("kind".to_owned(), kind_question),
     ]);
 
@@ -91,13 +101,21 @@ pub async fn decide(ctx: &Context, state: HashMap<String, String>) -> Result<Rep
     )
     .await?;
 
-    let is_scam = mean_noul(&first_responses, "is_scam")?;
+    let score = mean_score(&first_responses, "score")?;
     let kind = average_choice(&first_responses, "kind")?;
     let determined_kind = ScamType::from_str(&kind.choice)
         .map_err(|_| DecideError::InvalidKind(kind.choice.clone()))?;
 
     let mut prev_answers = BTreeMap::new();
-    prev_answers.insert("is_scam".to_owned(), Answer::Noul { noul: is_scam });
+    prev_answers.insert(
+        "score".to_owned(),
+        Answer::Score {
+            score,
+            confidence: None,
+            legend: None,
+            probabilities: None,
+        },
+    );
     prev_answers.insert(
         "kind".to_owned(),
         Answer::Choice {
@@ -136,7 +154,7 @@ pub async fn decide(ctx: &Context, state: HashMap<String, String>) -> Result<Rep
     let second_responses = ask_all(&clients, &State::Json(state_value), &second_questions).await?;
 
     Ok(Reply {
-        is_scam,
+        score: ScamScore::new(score),
         kind: determined_kind,
         sign: average_choice(&second_responses, "sign")?.choice,
     })

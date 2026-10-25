@@ -10,8 +10,8 @@ pub(crate) struct AveragedChoice {
     pub probabilities: BTreeMap<String, f64>,
 }
 
-// mean of the per-model noul scores, which run 0.0..1.0
-pub(crate) fn mean_noul(
+// mean of the per-model scores, which run 0.0..1.0
+pub(crate) fn mean_score(
     responses: &[SystemOneResponse],
     question: &str,
 ) -> Result<f64, DecideError> {
@@ -22,7 +22,7 @@ pub(crate) fn mean_noul(
     let mut total = 0.0;
     for response in responses {
         match response.answers.get(question) {
-            Some(Answer::Noul { noul }) => total += noul,
+            Some(Answer::Score { score, .. }) => total += score,
             _ => return Err(DecideError::UnexpectedAnswer(question.to_owned())),
         }
     }
@@ -105,8 +105,16 @@ mod tests {
         }
     }
 
-    fn noul(value: f64) -> SystemOneResponse {
-        response([("is_scam", Answer::Noul { noul: value })])
+    fn score(value: f64) -> SystemOneResponse {
+        response([(
+            "score",
+            Answer::Score {
+                score: value,
+                confidence: None,
+                legend: None,
+                probabilities: None,
+            },
+        )])
     }
 
     fn choice(choice: &str, probabilities: Option<BTreeMap<String, f64>>) -> Answer {
@@ -125,18 +133,18 @@ mod tests {
     }
 
     #[test]
-    fn mean_noul_averages_every_model() {
-        let responses = [noul(0.9), noul(0.5), noul(0.7)];
-        let mean = mean_noul(&responses, "is_scam").unwrap();
+    fn mean_score_averages_every_model() {
+        let responses = [score(0.9), score(0.5), score(0.7)];
+        let mean = mean_score(&responses, "score").unwrap();
         assert!((mean - 0.7).abs() < f64::EPSILON);
     }
 
     #[test]
-    fn mean_noul_rejects_other_answers() {
-        let responses = [response([("is_scam", choice("scam", None))])];
+    fn mean_score_rejects_other_answers() {
+        let responses = [response([("score", choice("scam", None))])];
         assert!(matches!(
-            mean_noul(&responses, "is_scam"),
-            Err(DecideError::UnexpectedAnswer(question)) if question == "is_scam"
+            mean_score(&responses, "score"),
+            Err(DecideError::UnexpectedAnswer(question)) if question == "score"
         ));
     }
 
