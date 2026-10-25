@@ -1,0 +1,17 @@
+[package]
+name = "explainer"
+version = "0.1.0"
+edition = "2024"
+license.workspace = true
+
+[dependencies]
+scam-decider.workspace = true
+async-openai.workspace = true
+donotredeem-shared.workspace = true
+thiserror.workspace = true
+serde_json.workspace = true
+serde.workspace = true
+
+[dev-dependencies]
+systemone.workspace = true
+tokio.workspace = true
