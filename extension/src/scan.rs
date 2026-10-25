@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use dioxus::prelude::*;
-use donotredeem_shared::Context;
+use scamvoidance_shared::Context;
 use explainer::{make_explained, ExplainError, ExplainedReply};
 use scam_decider::Verdict;
 use serde::Deserialize;

@@ -11,7 +11,7 @@
 
 use std::collections::HashMap;
 
-use donotredeem_shared::{Context, ContextBuilder, OpenaiContextBuilder, SystemoneContextBuilder};
+use scamvoidance_shared::{Context, ContextBuilder, OpenaiContextBuilder, SystemoneContextBuilder};
 use explainer::make_explained;
 
 const MODELS: [&str; 3] = [

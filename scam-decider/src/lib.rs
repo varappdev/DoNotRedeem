@@ -8,7 +8,7 @@ use std::{
 };
 
 use aggregate::{average_choice, mean_score};
-use donotredeem_shared::Context;
+use scamvoidance_shared::Context;
 pub use reply::*;
 pub use scam_types::*;
 use strum::VariantArray;

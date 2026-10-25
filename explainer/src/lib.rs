@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use async_openai::{config::OpenAIConfig, types::responses::CreateResponseArgs};
-use donotredeem_shared::Context;
+use scamvoidance_shared::Context;
 use scam_decider::{Reply, Verdict};
 use serde::{Deserialize, Serialize};
 

@@ -1,7 +1,7 @@
 use std::{collections::HashMap, rc::Rc};
 
 use dioxus::{logger::tracing, prelude::*};
-use donotredeem_shared::{Context, ContextBuilder, OpenaiContextBuilder, SystemoneContextBuilder};
+use scamvoidance_shared::{Context, ContextBuilder, OpenaiContextBuilder, SystemoneContextBuilder};
 use explainer::{make_explained, ExplainedReply};
 use scam_decider::Verdict;
 

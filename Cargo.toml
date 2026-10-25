@@ -1,13 +1,13 @@
 [workspace]
 resolver = "3"
-members = ["donotredeem-shared", "ui", "desktop", "extension", "systemone", "scam-decider", "explainer", "parser"]
+members = ["scamvoidance-shared", "ui", "desktop", "extension", "systemone", "scam-decider", "explainer", "parser"]
 
 
 [workspace.package]
 license = "GPL-3.0-or-later"
 
 [workspace.dependencies]
-donotredeem-shared = { path = "donotredeem-shared" }
+scamvoidance-shared = { path = "scamvoidance-shared" }
 systemone = { path = "systemone" }
 ui = { path = "ui" }
 scam-decider = { path = "scam-decider" }

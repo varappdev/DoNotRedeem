@@ -8,7 +8,7 @@
 
 use std::collections::HashMap;
 
-use donotredeem_shared::{Context, ContextBuilder, OpenaiContextBuilder, SystemoneContextBuilder};
+use scamvoidance_shared::{Context, ContextBuilder, OpenaiContextBuilder, SystemoneContextBuilder};
 use scam_decider::{Verdict, decide};
 
 const MODELS: [&str; 3] = [
