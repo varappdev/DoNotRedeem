@@ -1,12 +1,37 @@
 {
   "manifest_version": 3,
-  "name": "Do Not Redeem",
+  "name": "Scamvoidance",
   "version": "0.1.0",
-  "description": "Do Not Redeem browser extension.",
+  "description": "Scamvoidance browser extension.",
+  "permissions": [
+    "storage"
+  ],
   "action": {
-    "default_title": "Do Not Redeem",
+    "default_title": "Scamvoidance",
     "default_popup": "index.html"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "index.html",
+        "assets/*",
+        "wasm/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
   "content_security_policy": {
     "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
   },

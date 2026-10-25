@@ -1,0 +1,27 @@
+html, body, #main { margin: 0; background: transparent; overflow: hidden; }
+
+.tooltip-window {
+    width: 300px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.tooltip-window .window-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tooltip-window .status-container img {
+    width: 24px;
+}
+
+.tooltip-window .tooltip-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.tooltip-window .tooltip-actions button {
+    min-width: 0;
+    flex: 1;
+}
